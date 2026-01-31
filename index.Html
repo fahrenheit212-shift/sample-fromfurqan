@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Invitation | By-Furqan/The MasterMind</title>
+  <link rel="icon" href="531813.png" type="favicon.ico">
+  <style>
+
+    :root {
+      --gold: #d4af37;
+      --white: #ffffff;
+      --gray: #f4f4f4;
+      --text: #333333;
+    }
+    body {
+      background-color: var(--gray);
+      font-family: 'Georgia', serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+    }
+    .container {
+      background-color: var(--white);
+      max-width: 400px;
+      width: 100%;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center;
+      border: 1px solid var(--gold);
+    }
+    .hero-img {
+      width: 100%;
+      height: 250px;
+      overflow: hidden;
+      display: flex;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+    }
+    .content {
+      padding: 30px 20px;
+    }
+    h1 {
+      color: var(--gold);
+      font-size: 28px;
+      margin: 10px 0;
+    }
+    .tgl {
+      color: var(--text);
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    .btn-map {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background-color: var(--gold);
+      color: white;
+      text-decoration: none;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+    }
+    .btn-map:hover {
+      background-color: #b8952e;
+      transform: translateY(-3px);
+    }
+    @keyframes show {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    .container {
+      animation: show 1.5s ease-out;
+    }
+    .h1 {
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      border-bottom: 2px solid var(--gold);
+      display: inline-block;
+      padding-bottom: 5px;
+    }
+    .countdown-container {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .countdown-box {
+      background: var(--white);
+      border: 1px solid var(--text);
+      padding: 10px;
+      min-width: 60px;
+      box-shadow: 0 4px 8px rgba(0,0,0,00.5);
+      transition: transform 0.3s;
+    }
+    .countdown-box span {
+      display: block;
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--gold);
+    }
+    .countdown-box small {
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--text);
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero-img">
+      <img src="elvis-bekmanis-WJc87MVcDaA-unsplash.jpg" alt="Foto-Penganten.">
+    </div>
+
+    <div class="content">
+      <p>WALIMATUL 'URS</p>
+      <h1>Ferdi & Khadijah</h1>
+      <p class="tgl">26 . 1 . 2026</p>
+
+      <div class="countdown-container">
+        <div class="countdown-box">
+          <span id="hari">0</span>
+          <small>Hari</small>
+        </div>
+        <div class="countdown-box">
+          <span id="jam">0</span>
+          <small>Jam</small>
+        </div>
+        <div class="countdown-box">
+          <span id="menit">0</span>
+          <small>Menit</small>
+        </div>
+        <div class="countdown-box">
+          <span id="detik">0</span>
+          <small>Detik</small>
+        </div>
+      </div>
+
+      <p>Kami Menanti Kedatangan Anda.</p>
+      <button onclick="putarMusik()" class="btn-map" style="cursor: pointer; border: none;">
+        🎵Buka Undangan Dan Putar Musik!🎵
+      </button>
+      <a href="https://www.google.com/maps" target="_blank" class="btn-map">
+        Lihat Lokasi Acara!
+      </a>
+
+      <div class="confirmation" style="margin-top: 30px; padding: 20px; border-top: 1px double var(--gold);">
+        <h3>Konfirmasi Kehadiran</h3>
+        <input type="text" id="nama-tamu" placeholder="Nama Anda" style="width: 80%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 5px;">
+
+        <select id="statusHadir" style="width: 86%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc ; border-radius: 5px;">
+          <option value="hadir">Saya Akan Hadir😊</option>
+          <option value="ragu-ragu">Masih Kurang Yakin🤔</option>
+          <option value="not-hadir">Maaf, Saya Tidak Bisa😞</option>
+        </select>
+
+        <button onclick="KirimWA()" class="btn-map" style="border: none; width: 86%; cursor: pointer;">
+          📨Kirim via WhatsAPP📨
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <audio id="music" loop>
+    <source src="Musik-nikah.mp3" type="audio/mpeg">
+    Maaf, Browser Kamu Tidak Mendukung Musik
+  </audio>
+      <script>
+    function putarMusik() {
+      var audio = document.getElementById("music");
+      audio.play();
+      alert("Selamat Datang Di Undangan Kami!");
+    }
+
+    const targetDate = new Date("Feb 3, 2026 09:00:00").getTime();
+
+    setInterval(function() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      document.getElementById("hari").innerHTML = Math.floor(distance / (1000 * 60 * 60 * 24));
+      document.getElementById("jam").innerHTML = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      document.getElementById("menit").innerHTML = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      document.getElementById("detik").innerHTML = Math.floor((distance % (1000 * 60)) / 1000);
+    }, 1000);
+
+    function KirimWA() {
+      const nama = document.getElementById("nama-tamu").value;
+      const status = document.getElementById("statusHadir").value;
+
+      if (nama === "") {
+        alert("Mohon Di-isi Nama-nya Dulu..");
+        return;
+      }
+
+      const nomorHP = "6281274644740";
+
+      const teks = `Halo, Saya *${nama}*%0A%0A` +
+                   `Konfirmasi Kehadiran: *${status}*%0A%0A` +
+                   `Terima Kasih Atas Undangannya!`;
+
+      const urlWA = `https://api.whatsapp.com/send?phone=${nomorHP}&text=${teks}`;
+      
+      window.open(urlWA, `_blank`);
+    }
+  </script>
+</body>
+</html>
